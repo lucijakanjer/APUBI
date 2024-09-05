@@ -14,7 +14,7 @@ grouped_data <- penguins %>%
   group_by(species) %>% 
   summarise(mean_bill_length = mean(bill_length_mm, na.rm = TRUE))
 
-# Definiranje bioloških varijabl
+# Definiranje bioloških varijabli
 # Kreiranje nove varijable koja označava veličinu kljuna
 penguins$bill_size <- ifelse(penguins$bill_length_mm > 40, "large", "small")
 
