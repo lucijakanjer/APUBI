@@ -1,0 +1,6 @@
+Uzorak Visina Sirina  Vrsta
+Biljka1 10.5 12.3 maslacak
+Biljka2 20.3 22.5 jagoda
+Biljka3 30.1 28.4 tulipan
+Biljka4 25.7 26.1 kopriva
+Biljka5 15.2 14.7 trputac

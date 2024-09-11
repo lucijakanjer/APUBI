@@ -1,0 +1,35 @@
+---
+title: "Unos podataka i struktura objekata"
+subtitle: "Praktikum iz kolegija Analize podataka u biološkim istraživanjima"
+author: "Lucija Kanjer"
+date: '11.09.2024 '
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Unos podataka u R
+Podatke možete unositi ručno ili iz različitih izvora, kao što su: 
+
+- tekstualne datoteke, 
+- CSV datoteke, 
+- Excel, 
+- baze podataka,
+- izravno s interneta.
+
+## 1. Struktura osnovnih objekata u R
+#### 1.1 Kreiranje varijabli
+
+```{r cars, echo = TRUE}
+# Varijable su osnovni objekti u R-u.
+a <- 5            # integer - cijeli broj, dodati "L"
+x <- 3.14         # numeric - decimalni broj (realni)
+y <- "DNA"        # character - tekst/string
+z <- TRUE         # logical- logička vrijednost (TRUE/FALSE)
+
+# Provjera tipa podataka
+class(a)
+```
+
