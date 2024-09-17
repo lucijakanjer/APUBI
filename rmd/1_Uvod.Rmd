@@ -15,8 +15,10 @@ Otvorite poveznicu:
 ### https://forms.office.com/e/FPkBKCs02J
 
 ili __skenirajte QR kod__ i ispunite kratku anketu upoznavanja :)
-```{r, echo=FALSE}
-knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/anketa.png")
+
+```{r anketa, echo=FALSE}
+#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/anketa.png")
+knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/anketa.png")
 ```
 
 
@@ -39,85 +41,178 @@ knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/anketa.png")
    - upoznati RStudio sučelje
    - izvršiti osnovne naredbe u R-u
    
-## R jezik
+## Što je R?
 
-   - besplatni softver otvorenog koda 
-   - za statističko računanje i vizualizaciju podataka
-   - najčešće korišten u područjima bioinformatike i analize podataka
-   - temeljni jezik R (base R) 
-   - proširen je velikim brojem paketa
-   - Protrebno grafičko sučelje (engl. graphical user interface - GUI) – npr. R Studio, Jupyter, Visual Studio Code
+   - __R__ je jezik i okruženje za statističku analizu i vizualizaciju podataka.
+   - Otvoreni kod i __besplatan__ za korištenje, s aktivnom zajednicom korisnika.
+   - Najviše korišten u akademskoj zajednici tj. __znanstvenim istraživanjima__, posebno u biologiji, bioinformatici i statistici.
+   - __Base R__ pruža temeljne funkcije za manipulaciju podataka i statističke analize.
+   - Ogroman broj __dodatnih paketa__ dostupnih na CRAN-u omogućuje specifične analize.
+   - __Fleksibilan__ u vizualizaciji podataka, koristi se za jednostavne i složene grafove.
 
-### Prednost R-a
+### Povijest R-a
 
-   - Najviše korišten statistički alat u znanstvenim krugvima (biologija)
-   - Besplatan je
-   - Nudi mnogo statističkih metoda i vizalizacija preko njegovih mnogo paketa
-   - Velika globalna zajednica 
-   - Dobro održavana dokumentacija i forumi
+   - 1993. godina: R je nastao kao implementacija jezika S kojeg su razvili statističari John Chambers i tim u Bell Laboratories.
+   - Razvoj R-a započeli su Ross Ihaka i Robert Gentleman s University of Auckland na Novom Zelandu.
+   - 1995. godina: R postaje otvoreni softver, objavljen pod GNU licencom, što omogućuje doprinos globalne zajednice.
+   - 2000. godina: Objavljena prva stabilna verzija R-a (R 1.0.0).
+   - CRAN (Comprehensive R Archive Network) postaje ključna platforma za distribuciju R-a i njegovih paketa.
+   - Danas: R je jedan od najpopularnijih jezika za statistiku i analizu podataka, s tisućama dostupnih paketa i širokom primjenom u znanosti i industriji.
 
-#### Instalacija R-a
-CRAN – Comprehensive R archive network https://cran.r-project.org/ 
+### Prednosti R-a
+
+1. __Otvoreni kod i besplatnost__
+   - R je besplatan softver otvorenog koda, što znači da nema troškova licenci, za    razliku od mnogih komercijalnih alata kao što su SPSS ili Statistica.
+   - Korisnici mogu doprinositi razvoju dodavanjem novih funkcionalnosti kroz pakete i unapređivanjem postojećih alata.
+   
+2. __Velika zajednica korisnika i podrška__
+   - R ima jednu od najvećih i najaktivnijih globalnih zajednica statističara, bioinformatičara i analitičara.
+   - Forumi, blogovi i dokumentacija pružaju široku podršku za rješavanje problema.
+   - Postoji bogata baza online tutorijala, vodiča i primjera koda, što olakšava učenje i rad.
+   
+3. __Veliki broj paketa za specijalizirane analize__
+   - CRAN (Comprehensive R Archive Network) ima više od 18,000 paketa koji pokrivaju širok raspon statističkih i analitičkih tehnika.
+   - Specijalizirani paketi za različite domene (bioinformatika, epidemiologija, ekonomija) omogućuju analize prilagođene potrebama specifičnih znanstvenih područja.
+   
+4. __Fleksibilnost i prilagodljivost__
+   - R je iznimno prilagodljiv, omogućujući korisnicima kreiranje vlastitih funkcija i prilagodbu analiza prema specifičnim potrebama.
+   - Moguće je lako prilagoditi i vizualizacije, od jednostavnih grafova do složenih interaktivnih vizualizacija koristeći pakete kao što su ggplot2, plotly ili shiny.
+   
+5. __Napredne statističke i analitičke metode__
+   - R podržava širok spektar statističkih tehnika, uključujući i napredne metode kao što su: regresije, korelacije, klaster analize, analize vremenskih serija, multivarijatne metode i složeni statistički modeli kao što su GLM, survival analize ili Bayesovski modeli.
+   - Mnogi od ovih metoda su implementirani kao standardni paketi u R-u, dok ih komercijalni alati često nude u dodatnim modulima uz nadoplatu.
+   
+6. __Vizualizacija podataka__
+   - R je poznat po naprednim mogućnostima vizualizacije podataka putem paketa poput ggplot2.
+   - Omogućava izradu visoko prilagodljivih grafova (scatter plotovi, box plotovi, bar chartovi, heatmapovi, itd.).
+   - Moguća je izrada interaktivnih vizualizacija i aplikacija.
+   
+7. __Reproducibilnost i integracija s drugim alatima__
+   - R omogućava reproducibilnu analizu putem skripti, koje bilježe sve korake u analizi podataka.
+   - Može se koristiti zajedno s R Markdown-om za stvaranje dinamičnih izvještaja, koje je moguće izvesti u PDF, HTML ili Word formatu.
+   - Dobro se integrira s drugim programskim jezicima kao što su Python, C++, Java i alatima poput SQL-a.
+   - Povezanost s platformama poput Git-a omogućava verzioniranje koda i suradnju.
+   
+8. __Cross-platform kompatibilnost__
+   - R radi na različitim operativnim sustavima kao što su Windows, macOS, Linux, što omogućava fleksibilnost korisnicima u radu na različitim platformama.
+    - Kôd napisan u R-u može se koristiti na bilo kojem sustavu bez modifikacija, što ga čini vrlo praktičnim za rad u različitim okruženjima.
+    
+9. __Skalabilnost i rad s velikim podacima__
+   - Iako osnovni R radi u memoriji, postoje paketi kao što su data.table, dplyr i sparklyr koji omogućavaju obradu velikih skupova podataka.
+   
+10. __Prijenos znanja__
+    - Znanje stečeno korištenjem R-a može se lako prenijeti na druge programske jezike i analitičke alate, jer R dijeli mnogo zajedničkih koncepta s drugim jezicima kao što su Python, Matlab, ili Julia.
+    - R potiče korisnike da razumiju osnove statistike i programiranja, što omogućava dublje razumijevanje analitičkog procesa.
+
+
+#### Mane R-a u odnosu na druge statističke alate:
+
+   - __Strma krivulja učenja:__ R je programerski jezik, što može biti izazovno za početnike koji nisu upoznati s programiranjem, za razliku od alata s jednostavnijim grafičkim sučeljem poput SPSS-a ili Excel-a.
+
+   - __Nema ugrađenog GUI-a:__ Osnovni R dolazi bez grafičkog korisničkog sučelja (GUI), pa korisnici često moraju instalirati dodatne alate poput RStudio-a ili koristiti naredbene linije.
+
+   - __Manje intuitivno sučelje:__ Iako RStudio olakšava rad s R-om, njegova tekstualna priroda nije toliko intuitivna kao "point-and-click" sučelja koja nude drugi alati poput SPSS-a, Stata ili Minitaba.
+
+   - __Brzina s velikim podacima:__ R može postati spor kod vrlo velikih setova podataka, pogotovo u usporedbi s alatima poput Python-a, koji su optimiziraniji za obradu velikih podataka. Ovaj dio se može optimizirati instalacijom specijaliziranih paketa za obradu podataka.
+
+   - __Loša memorijska optimizacija:__ R zadržava sve podatke u memoriji, što može biti problem kod obrade velikih skupova podataka jer zahtijeva velike količine RAM-a.
+
+   - __Manje ugrađene vizualizacijske opcije:__ Za razliku od alata poput Excel-a, koji nude jednostavne i intuitivne vizualizacijske mogućnosti, u R-u korisnik mora koristiti posebne pakete (npr. ggplot2) za složene grafove.
+
+   - __Korisnički servis:__ R kao alat otvorenog koda nema profesionalnu tehničku podršku, što može biti problematično za korisnike kojima je potrebna hitna pomoć ili dokumentacija.
+
+### Instalacija R-a
+R se može preuzeti sa CRAN-a (Comprehensive R archive network) https://cran.r-project.org/ 
 
 ```{r install R, echo=FALSE}
-knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation1.png")
+#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation1.png")
+knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Installation1.png")
 
 ```
 
-#### Instalacija RStudio-a
+### Instalacija RStudio-a
 
-RStudio je dostupan na Posit web stranici:
+RStudio je dostupan za preuzimanje na Posit web stranici:
 
    - https://posit.co/download/rstudio-desktop/ 
 
 
 ```{r install RStudio, echo=FALSE}
-knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation2.png")
+#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation2.png")
+knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Installation2.png")
 ```
 
 
 ### RStudio - sučelje
 
-   - panel A: __skripta__ - dio u koji pišemo naredbe i komentare koje možemo izvršavati i spremiti
-   - panel B: __konzola__ (engl. console) - dio u kojemo se naredbe izvršavaju, ali se ne može spremiti za ponovnu upotrebu; također i dio za terminal, render i pozadinske poslove
-   - panel C: okoliš (engl. __environment__) - dio u kojem vidimo stvorene R objekte; također i dio za povijest, veze; git sinkronizaciju i tutoriale
-   - panel D: __plots__ - dio za vizualizaciju grafova; __packages__ - dio za vizualizaciju i učitavanje dostupnih paketa; __help__ - u kojem se prikažu tražene informacije o paketima i naredbama; __files__ - vizualizacija trenutnog radnog direktorija (nije za postavljanje novog radnog direkto)
+   - Panel A: __Skripta__ - dio u koji pišemo naredbe i komentare koje možemo izvršavati i spremiti za ponovnu upotrebu.
+   - Panel B: __Konzola__ (engl. console) - dio u kojemo se naredbe izvršavaju (interaktivno okruženje), ali se ne može spremiti za ponovnu upotrebu; također i dio za terminal, render i pozadinske poslove.
+   - Panel C: Okoliš (engl. __environment__) - dio u kojem vidimo stvorene R objekte; također i dio za povijest, veze; git sinkronizaciju i tutoriale.
+   - Panel D: __plots__ - dio za vizualizaciju grafova; __packages__ - dio za vizualizaciju i učitavanje dostupnih paketa; __help__ - u kojem se prikažu tražene informacije o paketima i naredbama; __files__ - vizualizacija trenutnog radnog direktorija (nije za postavljanje novog radnog direktorije).
 
-```{r image, echo=FALSE}
-knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Rstudio_panels.png")
-
+```{r RStudio, echo=FALSE}
+#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Rstudio_panels.png")
+knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Rstudio_panels.png")
 ```
 
-## Otvorite RStudio i krenimo s prvim naredbama!
-Izvršavanje naredbi iz skripte: Ctrl + Enter
+## Rad u R-u i RStudio-u
+
+   - Otvorite RStudio i krenimo s prvim naredbama! 
+   - Izvršavanje naredbi: __Ctrl + Enter__ u skripti.
+   
 ```{r hello world}
 print("Hello world!")
-# Ovo je moj prvi komentar :)
 ```
 
+   - Sve što se piše iza znaka "__#__" u skripti, predstavlja __komentar__ i neće biti izvršeno kao naredba. 
+   - Komentari se pišu u skripti kako bi naš kod bio pregledan i reproducibilan.
+
+```{r komentar}
+# Komentari cijelog reda
+print("Dobar dan svijete!") # komentar nakon naredbe
+```
+
+
 #### Definiranje varijabli
+   - Varijable su pojedinačne vrijednosti.
+   - U R-u, svaka varijabla može pohranjivati brojeve, tekstualne vrijednosti ili logičke vrijednosti.
+   - Definiraju se pomoći znakova "__<-__" (ili rjeđe "=")
+   
 ```{r varijable}
 # Definiranje varijabli
 a <- 5
 b = 3 
-print (a + b)
+```
 
+   - __Ispis__ tj. prikaz R objekata, može se izvršiti na više načina:
+   
+```{r ispis}
+print(a)
+print(a + b)
+a
+View(a) # ispis u novom tab- u RStudio-a
+cat(a)
+```
+
+__Zadatak:__ Napravite varijablu "visina" te u nju spremite vrijednost svoje visine, te varijablu "godina" te u nju spremite vrijednost svoje godine rođenja. Ispišite svaku varijablu na različiti način.
+
+```{r visina}
 visina <- 170
 godina = 1995
 print(visina)
-print(godina)
+godina
 ```
 
 #### Rad s osnovnim matematičkim operacijama
+
 ```{r operacije}
 # Zbroj
 zbroj <- 5 + 3
 print(zbroj)
-zbroj
 
 # Umnožak
 umnožak <- 4 * 7
-umnožak 
+print(umnožak)
 
 # Prosjek
 prosjek <- mean(c(1, 2, 3, 4, 5))
@@ -126,39 +221,157 @@ print(prosjek)
 
 ### Rad s datotakama
 #### Radni direktorij, engl. __working directory__
+
 ```{r wd}
 # Provjeravanje radnog direktorija (working directory)
 getwd()
 
 # Postavljanje radnog direktorija
-setwd("C:/Users/lucij/Documents/APUBI")
+#setwd("C:/Users/lucij/Documents/APUBI") # moj laptop
+setwd("C:/Users/Hrvoje/Documents/APUBI") # poslovno računalo
 
 # učitavanje tablice s podacima
-#read.csv("palmerpenguins_extended.csv", header = TRUE)
+#read.csv("animals.txt", header = TRUE)
 ```
 
 ### Paketi
-Instalacijom dodatnih paketa moguće je prilagoditi svoje analize, a izbora je stvarno puno!
+   - Instalacijom dodatnih paketa moguće je prilagoditi svoje analize, a izbora je stvarno puno!
+   - Npr. Za vizualizaciju podataka najčešće se korsiti dodatni paket __ggplot2__ koji nije uključen u temeljni R (*base R*) te ga je potrebno instalirati. 
+    - Instalacija paketa izvršava se samo jednom, a učitavanje paketa (library() naredba) mora se izvršiti prilikom svakog otvaranja RStudio-a, tj. početkom svake nove sesije.
+    
 ```{r packages}
 # Instalacija paketa
-#install.packages("palmerpenguins")
+#install.packages("ggplot2")
 
-# Učitaj paket u radno okruženje
-library(palmerpenguins)
+# Učitavanje paketa
 library(ggplot2)
-
-# Izrada grafa
-library(ggplot2)
-ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
-  geom_point(aes(color = species, 
-                 shape = species),
-             size = 2) +
-  scale_color_manual(values = c("darkorange","darkorchid","cyan4"))
 ```
 
-## Zadaci
+### Izrada grafova
+   - U R-u postoje već učitani setovi podataka za koje je dovoljno samo pozvati ih naredbom data(). 
+   - Za izradu grafa koristiti ćemo dataset __iris__ koji sadrži morfometrijske podatke za tri različite vrste irisa: *I. setosa*, *I. versicolor* te *I. virginica*.
+   - Prije izrade grafa potrebno je pogledati kako izgleda tablica s kojom radimo.
 
-   1. Instalirajte i učitajte paket RColorBrewer.
-   2. Kreirajte varijable za visinu 3 različite životinje.
-   3. Izračunajte prosjek visine životinja koje ste upisali.
+```{r iris}
+# učitavanje podataka iz pokaznog dataseta "iris"
+data("iris")
+
+# vizualizacija dataseta
+head(iris) # prikaz "glave" tablice
+View(iris) # prikaz u novom tabu pored skripte
+```
+
+```{r view, echo=FALSE}
+knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/iris.jpg")
+```
+
+#### Korištenje paketa __ggplot2__
+
+   - Popularan R paket za vizualizaciju podataka.
+   - Temeljen na konceptu *Grammar of Graphics*.
+   - Omogućava izradu složenih i prilagodljivih grafova.
+   - Glavni koncepti
+       - aes (estetika): Definira osi, boje, veličine, oblike.
+       - geom (geometrijski objekti): Točke (geom_point), linije (geom_line), stupci (geom_bar).
+
+#### 1. Naredba ggplot() počinje stvaranje svih grafova koji se onda prilagođavaju "sloj po sloj".
+
+```{r ggplot 1}
+ggplot()
+```
+
+#### 2. Definiranje seata podataka iz kojeg crtamo graf i koje varijable želimo prikazati.
+
+```{r ggplot 2}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width))
+```
+
+#### 3. Sloj "geom" služi definiranju vrste grafa, u ovom slučaju naredba geom_point() predstavlja točkasti graf (scatterplot).
+
+```{r ggplot 3}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width)) +
+  geom_point()
+```
+
+#### 4. Na grafu prilagođavamo elemente poput boje i oblika točaka koji se razlikuju po vrstama irisa.
+
+```{r ggplot 4}
+ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width)) +
+  geom_point(aes(color = Species, shape = Species)) + 
+  labs(title = "Duljina i Širina latica irisa",
+       x = "duljina latica (cm)",
+       y = "širina latica (cm)")
+```
+
+__Zadatak:__ Promjenite gornji dio koda za graf tako da se prikazuju podaci za varijable "Sepal.Length" i "Sepal.Width". Pazite da promjeniti i nazive osi i naslov!
+
+## Samostalni zadaci
+
+   1. Kreirajte 3 varijable za visine 3 različite životinje.
+   2. Izračunajte i ispišite prosjek visine životinja koje ste upisali.
+   3. Napravite novu mapu naziva "Pingvini" te ju postavite kao novi radni direktorij.
+   4. Instalirajte paket "palmerpenguins" i učitajte ga u radno okruženje.
+   5. Učitajte podatke iz dataseta "pengiuns" te vizualizirajte tablicu.
+   6. Napravite ggplot2 graf s podacima "penguins" koji prikazuje na osi x varijablu "flipper_length_mm", a na osi y varijablu "body_mass_g". Boja i oblik točaka neka se razlikuje po vrstama (varijable "species").
+
+## Kviz
+Otvorite poveznicu:
+
+### https://forms.office.com/e/cG5bh8WvPk 
+
+ili __skenirajte QR kod__ i ispunite kratki kviz danas naučenoga! :)
+
+```{r kviz, echo=FALSE}
+#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/kviz.png")
+knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/kviz.png")
+```
+
+   
+## Rješenja zadataka
+
+```{r zad1}
+# 1. Kreirajte 3 varijable za visine 3 različite životinje.
+miš <- 5
+sova <- 58
+ris <- 75
+```
+
+```{r zad2}
+# 2. Izračunajte i ispišite prosjek visine životinja koje ste upisali.
+prosjek_visina <- mean(miš, sova, ris)
+print(prosjek_visina)
+```
+
+```{r zad3}
+# 3. Napravite novu mapu naziva "Pingvini" te ju postavite kao novi radni direktorij.
+
+# Novu mapu napravite u Pregledniku datoteka: desni klik -> Nova mapa -> promjeni naziv u "pingvini".
+
+# setwd("C:\Users\Hrvoje\Documents\pingvini")
+```
+
+```{r zad4 }
+# 4. Instalirajte paket "palmerpenguins" i učitajte ga u radno okruženje.
+
+# install.packages("palmerpenguins")
+library(palmerpenguins)
+```
+
+```{r zad5}
+# 5. Učitajte podatke iz dataseta "pengiuns" te vizualizirajte tablicu.
+
+data("penguins")
+View(penguins) # vizualizacija u novom tabu
+# ili
+head(penguins)
+```
+
+```{r zad6}
+# 6. Napravite ggplot2 graf s podacima "penguins" koji prikazuje na osi x varijablu "flipper_length_mm", a na osi y varijablu "body_mass_g". Boja i oblik točaka neka se razlikuje po vrstama (varijable "species").
+
+ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species,
+                 shape = species))
+```
+
    
