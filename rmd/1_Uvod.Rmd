@@ -1,0 +1,164 @@
+---
+title: "Uvod u R i RStudio"
+author: "Lucija Kanjer"
+date: "16.09.2024."
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## "Koliko volim R i statistiku?"
+Otvorite poveznicu:
+
+### https://forms.office.com/e/FPkBKCs02J
+
+ili __skenirajte QR kod__ i ispunite kratku anketu upoznavanja :)
+```{r, echo=FALSE}
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/anketa.png")
+```
+
+
+### Ishodi učenja praktikuma
+
+   - Upoznati se s R okruženejm
+   - Premostiti strah od „programiranja”
+   - Proći „energiju aktivacije” koja je potrebna za korištenje R-a i rada na vlastitim podacima i projektima
+   - Moći izraditi vlastite analize uz pomoći svih danas dostupnih alata
+   
+### Što nije ishod ovog praktikuma?
+
+   - Sveobuhvatno znanje o R-u
+   - Sveobuhvatno znanje o svim statističkim metodama
+   - Tečaj programiranja
+   - Učenje napamet naredbi R-a
+
+### Ishodi učenja današnje vježbe
+
+   - upoznati RStudio sučelje
+   - izvršiti osnovne naredbe u R-u
+   
+## R jezik
+
+   - besplatni softver otvorenog koda 
+   - za statističko računanje i vizualizaciju podataka
+   - najčešće korišten u područjima bioinformatike i analize podataka
+   - temeljni jezik R (base R) 
+   - proširen je velikim brojem paketa
+   - Protrebno grafičko sučelje (engl. graphical user interface - GUI) – npr. R Studio, Jupyter, Visual Studio Code
+
+### Prednost R-a
+
+   - Najviše korišten statistički alat u znanstvenim krugvima (biologija)
+   - Besplatan je
+   - Nudi mnogo statističkih metoda i vizalizacija preko njegovih mnogo paketa
+   - Velika globalna zajednica 
+   - Dobro održavana dokumentacija i forumi
+
+#### Instalacija R-a
+CRAN – Comprehensive R archive network https://cran.r-project.org/ 
+
+```{r install R, echo=FALSE}
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation1.png")
+
+```
+
+#### Instalacija RStudio-a
+
+RStudio je dostupan na Posit web stranici:
+
+   - https://posit.co/download/rstudio-desktop/ 
+
+
+```{r install RStudio, echo=FALSE}
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation2.png")
+```
+
+
+### RStudio - sučelje
+
+   - panel A: __skripta__ - dio u koji pišemo naredbe i komentare koje možemo izvršavati i spremiti
+   - panel B: __konzola__ (engl. console) - dio u kojemo se naredbe izvršavaju, ali se ne može spremiti za ponovnu upotrebu; također i dio za terminal, render i pozadinske poslove
+   - panel C: okoliš (engl. __environment__) - dio u kojem vidimo stvorene R objekte; također i dio za povijest, veze; git sinkronizaciju i tutoriale
+   - panel D: __plots__ - dio za vizualizaciju grafova; __packages__ - dio za vizualizaciju i učitavanje dostupnih paketa; __help__ - u kojem se prikažu tražene informacije o paketima i naredbama; __files__ - vizualizacija trenutnog radnog direktorija (nije za postavljanje novog radnog direkto)
+
+```{r image, echo=FALSE}
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Rstudio_panels.png")
+
+```
+
+## Otvorite RStudio i krenimo s prvim naredbama!
+Izvršavanje naredbi iz skripte: Ctrl + Enter
+```{r hello world}
+print("Hello world!")
+# Ovo je moj prvi komentar :)
+```
+
+#### Definiranje varijabli
+```{r varijable}
+# Definiranje varijabli
+a <- 5
+b = 3 
+print (a + b)
+
+visina <- 170
+godina = 1995
+print(visina)
+print(godina)
+```
+
+#### Rad s osnovnim matematičkim operacijama
+```{r operacije}
+# Zbroj
+zbroj <- 5 + 3
+print(zbroj)
+zbroj
+
+# Umnožak
+umnožak <- 4 * 7
+umnožak 
+
+# Prosjek
+prosjek <- mean(c(1, 2, 3, 4, 5))
+print(prosjek)
+```
+
+### Rad s datotakama
+#### Radni direktorij, engl. __working directory__
+```{r wd}
+# Provjeravanje radnog direktorija (working directory)
+getwd()
+
+# Postavljanje radnog direktorija
+setwd("C:/Users/lucij/Documents/APUBI")
+
+# učitavanje tablice s podacima
+#read.csv("palmerpenguins_extended.csv", header = TRUE)
+```
+
+### Paketi
+Instalacijom dodatnih paketa moguće je prilagoditi svoje analize, a izbora je stvarno puno!
+```{r packages}
+# Instalacija paketa
+#install.packages("palmerpenguins")
+
+# Učitaj paket u radno okruženje
+library(palmerpenguins)
+library(ggplot2)
+
+# Izrada grafa
+library(ggplot2)
+ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+             size = 2) +
+  scale_color_manual(values = c("darkorange","darkorchid","cyan4"))
+```
+
+## Zadaci
+
+   1. Instalirajte i učitajte paket RColorBrewer.
+   2. Kreirajte varijable za visinu 3 različite životinje.
+   3. Izračunajte prosjek visine životinja koje ste upisali.
+   
