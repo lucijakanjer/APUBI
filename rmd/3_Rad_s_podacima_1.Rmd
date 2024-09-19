@@ -1,0 +1,152 @@
+---
+title: "Rad s objektima i podacima, definiranje bioloških varijabli, 1.dio"
+author: "Lucija Kanjer"
+date: '19.09.2024 '
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Ishod vježbe
+
+   - Naučiti manipulaciju objektima u R-u.
+   - Definirati biološke varijable vezane uz molekularnu biologiju (primjer DNA, RNA, proteini).
+   - Vizualizirati podatke koristeći ggplot2 za bolje razumijevanje rezultata.
+
+## 1. Ponovimo osnovne tipove objekata 
+
+   - Varijable, vektori, data frame-ovi.
+    
+```{r ponovimo}
+# Kreirajmo jednu varijablu, vektor i data frame
+pi <- 3.14
+print(pi)
+
+vektor <- c(1, 2, 3, 4, 5)
+vektor
+
+df <- data.frame(
+  student = c("Ana", "Marko", "Julia"),
+  smjer = c("FIM", "ekologija", "molekularna"),
+  ljubimci = c(3, 0, 1),
+  visina = c(163, 170, 182)
+  )
+print(df)
+
+```
+
+__Zadatak:__ Nadopunite ovaj data frame sa podacima za vaš turnus. Vizualizirajte data frame (tablicu).
+
+## 2. Rad s data frame-ovima
+
+   - Kreiranje i manipulacija podacima vezanim uz biološke eksperimente.
+   - Selektiranje i filtriranje podataka.
+
+```{r data frame}
+# Rad s data frame-ovima
+# Kreiramo fiktivan set podataka o sekvencama DNA
+
+sekvence <- data.frame(
+  ID = c("Seq1", "Seq2", "Seq3", "Seq4"),
+  duzina_bp = c(1000, 1500, 800, 1200),  # dužina u bp
+  GC_sadrzaj = c(0.45, 0.52, 0.48, 0.50)  # GC sadržaj kao udio
+)
+
+# Prikaz data frame-a
+print(sekvence)
+
+# Dodavanje nove varijable za broj G+C nukleotida
+sekvence$broj_GC <- sekvence$duzina_bp * sekvence$GC_sadrzaj
+```
+
+
+## 3. Primjer: Definiranje bioloških varijabli za sekvence DNA/RNA/proteina
+
+   - Kreiranje varijabli za sekvence nukleotida, GC sadržaj, dužinu proteina.
+
+
+```{r}
+# Definiranje bioloških varijabli
+sekvenca_DNA <- c("ATGCGTACG", "GCTAGCTAGC", "CGTACGTACG", "ATCGATCGTA")
+sekvenca_proteina <- c("MVR", "ALA", "TGV", "IRV")
+```
+
+## 4. Vizualizacija podataka pomoću ggplot2
+   - Izrada grafa za GC sadržaj različitih sekvenci.
+   
+```{r vizualizacija}
+# Učitavanje ggplot2 paketa
+library(ggplot2)
+
+# Scatter plot - Dužina sekvence vs GC sadržaj
+ggplot(sekvence, aes(x = duzina_bp, y = GC_sadrzaj)) +
+  geom_point(size = 3) +
+  labs(title = "Ovisnost dužine DNA sekvence i GC sadržaja",
+       x = "Dužina sekvence (bp)",
+       y = "GC sadržaj") +
+  theme_minimal()
+```
+
+
+## 5. Vježbanje: Kreiranje vlastitih bioloških varijabli i vizualizacija
+
+```{r vježba}
+# 5. Vježba - Kreiranje vlastitih bioloških varijabli
+duzina_RNA <- c(800, 1200, 1000, 1400)
+sadrzaj_uracil <- c(0.35, 0.40, 0.38, 0.42)
+
+# Ispis osnovnih statistika
+summary(duzina_RNA)
+summary(sadrzaj_uracil)
+
+# Vizualizacija bioloških varijabli
+rna_data <- data.frame(duzina_RNA, sadrzaj_uracil)
+
+ggplot(rna_data, aes(x = duzina_RNA, y = sadrzaj_uracil)) +
+  geom_point(size = 3) +
+  labs(title = "Ovisnost dužine RNA sekvence i uracil sadržaja",
+       x = "Dužina RNA (bp)",
+       y = "Sadržaj uracila") +
+  theme_minimal()
+```
+
+```{r}
+# Učitavanje potrebnih paketa
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+
+# Koristimo iris dataset i dodajemo nove podatke iz molekularne biologije
+iris <- datasets::iris
+
+# Dodajmo fiktivne molekularne podatke o ekspresiji gena u cvjetovima biljaka
+set.seed(123)
+iris$gen_exp_ABC <- runif(n = 150, min = 10, max = 100)  # ekspresija gena ABC
+iris$gen_exp_XYZ <- runif(n = 150, min = 5, max = 50)    # ekspresija gena XYZ
+iris$DNA_integrity <- sample(c("High", "Medium", "Low"), size = 150, replace = TRUE)  # Kvaliteta DNK
+
+# Pregled podataka
+glimpse(iris)
+
+# Filtriranje podataka: Npr. filtriramo sve biljke gdje je ekspresija gena ABC veća od 50
+filtrirani_iris <- iris %>% filter(gen_exp_ABC > 50)
+print(filtrirani_iris)
+
+# Sortiranje podataka po ekspresiji gena XYZ
+sortirani_iris <- iris %>% arrange(gen_exp_XYZ)
+print(sortirani_iris)
+
+# Spajanje s drugim podacima: Npr. dodajmo još jedan stupac s fiktivnim podacima o proteinima
+set.seed(456)
+proteini <- data.frame(
+  Protein_Exp = runif(n = 150, min = 50, max = 200),
+  ID = 1:150
+)
+
+# Spajanje podataka po redoslijedu
+iris_spojeni <- bind_cols(iris, proteini)
+print(head(iris_spojeni))
+```
+
