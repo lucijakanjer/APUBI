@@ -2,7 +2,7 @@
 title: "Uvod u R i RStudio"
 author: "Lucija Kanjer"
 date: "16.09.2024."
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -17,8 +17,8 @@ Otvorite poveznicu:
 ili __skenirajte QR kod__ i ispunite kratku anketu upoznavanja :)
 
 ```{r anketa, echo=FALSE}
-#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/anketa.png")
-knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/anketa.png")
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/anketa.png")
+#knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/anketa.png")
 ```
 
 
@@ -125,8 +125,8 @@ knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/anketa.png")
 R se može preuzeti sa CRAN-a (Comprehensive R archive network) https://cran.r-project.org/ 
 
 ```{r install R, echo=FALSE}
-#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation1.png")
-knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Installation1.png")
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation1.png")
+#knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Installation1.png")
 
 ```
 
@@ -138,8 +138,8 @@ RStudio je dostupan za preuzimanje na Posit web stranici:
 
 
 ```{r install RStudio, echo=FALSE}
-#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation2.png")
-knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Installation2.png")
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Installation2.png")
+#knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Installation2.png")
 ```
 
 
@@ -151,8 +151,8 @@ knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Installation2.png")
    - Panel D: __plots__ - dio za vizualizaciju grafova; __packages__ - dio za vizualizaciju i učitavanje dostupnih paketa; __help__ - u kojem se prikažu tražene informacije o paketima i naredbama; __files__ - vizualizacija trenutnog radnog direktorija (nije za postavljanje novog radnog direktorije).
 
 ```{r RStudio, echo=FALSE}
-#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Rstudio_panels.png")
-knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Rstudio_panels.png")
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/Rstudio_panels.png")
+#knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/Rstudio_panels.png")
 ```
 
 ## Rad u R-u i RStudio-u
@@ -227,11 +227,11 @@ print(prosjek)
 getwd()
 
 # Postavljanje radnog direktorija
-#setwd("C:/Users/lucij/Documents/APUBI") # moj laptop
-setwd("C:/Users/Hrvoje/Documents/APUBI") # poslovno računalo
+setwd("C:/Users/lucij/Documents/APUBI") # moj laptop
+#setwd("C:/Users/Hrvoje/Documents/APUBI") # poslovno računalo
 
 # učitavanje tablice s podacima
-#read.csv("animals.txt", header = TRUE)
+read.table("C:/Users/lucij/Documents/APUBI/rmd/animals.txt", header = TRUE)
 ```
 
 ### Paketi
@@ -262,7 +262,8 @@ View(iris) # prikaz u novom tabu pored skripte
 ```
 
 ```{r view, echo=FALSE}
-knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/iris.jpg")
+#knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/iris.jpg")
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/iris.jpg")
 ```
 
 #### Korištenje paketa __ggplot2__
@@ -280,7 +281,7 @@ knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/iris.jpg")
 ggplot()
 ```
 
-#### 2. Definiranje seata podataka iz kojeg crtamo graf i koje varijable želimo prikazati.
+#### 2. Definiranje seta podataka iz kojeg crtamo graf i koje varijable želimo prikazati.
 
 ```{r ggplot 2}
 ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width))
@@ -298,7 +299,7 @@ ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width)) +
 ```{r ggplot 4}
 ggplot(data=iris, aes(x = Petal.Length, y = Petal.Width)) +
   geom_point(aes(color = Species, shape = Species)) + 
-  labs(title = "Duljina i Širina latica irisa",
+  labs(title = "Duljina i širina latica irisa",
        x = "duljina latica (cm)",
        y = "širina latica (cm)")
 ```
@@ -312,7 +313,7 @@ __Zadatak:__ Promjenite gornji dio koda za graf tako da se prikazuju podaci za v
    3. Napravite novu mapu naziva "Pingvini" te ju postavite kao novi radni direktorij.
    4. Instalirajte paket "palmerpenguins" i učitajte ga u radno okruženje.
    5. Učitajte podatke iz dataseta "pengiuns" te vizualizirajte tablicu.
-   6. Napravite ggplot2 graf s podacima "penguins" koji prikazuje na osi x varijablu "flipper_length_mm", a na osi y varijablu "body_mass_g". Boja i oblik točaka neka se razlikuje po vrstama (varijable "species").
+   6. Napravite ggplot2 graf s podacima "penguins" koji prikazuje na osi x varijablu "flipper_length_mm", a na osi y varijablu "body_mass_g". Boja i oblik točaka neka se razlikuje po vrstama (varijabla "species").
 
 ## Kviz
 Otvorite poveznicu:
@@ -322,8 +323,8 @@ Otvorite poveznicu:
 ili __skenirajte QR kod__ i ispunite kratki kviz danas naučenoga! :)
 
 ```{r kviz, echo=FALSE}
-#knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/kviz.png")
-knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/kviz.png")
+knitr::include_graphics("C:/Users/lucij/Documents/APUBI/rmd/kviz.png")
+#knitr::include_graphics("C:/Users/Hrvoje/Documents/APUBI/rmd/kviz.png")
 ```
 
    

@@ -460,31 +460,27 @@ data(&quot;penguins&quot;)
 
 # Pregled prvih nekoliko redaka podataka
 head(penguins)</code></pre>
-<pre><code>##   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-## 1  Adelie Torgersen           39.1          18.7               181        3750
-## 2  Adelie Torgersen           39.5          17.4               186        3800
-## 3  Adelie Torgersen           40.3          18.0               195        3250
-## 4  Adelie Torgersen             NA            NA                NA          NA
-## 5  Adelie Torgersen           36.7          19.3               193        3450
-## 6  Adelie Torgersen           39.3          20.6               190        3650
-##      sex year
-## 1   male 2007
-## 2 female 2007
-## 3 female 2007
-## 4   &lt;NA&gt; 2007
-## 5 female 2007
-## 6   male 2007</code></pre>
+<pre><code>## # A tibble: 6 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           NA            NA                  NA          NA
+## 5 Adelie  Torgersen           36.7          19.3               193        3450
+## 6 Adelie  Torgersen           39.3          20.6               190        3650
+## # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 <pre class="r"><code># Tipovi podataka - provjera strukture
 str(penguins)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    344 obs. of  8 variables:
+<pre><code>## tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
 ##  $ species          : Factor w/ 3 levels &quot;Adelie&quot;,&quot;Chinstrap&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ island           : Factor w/ 3 levels &quot;Biscoe&quot;,&quot;Dream&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
-##  $ bill_length_mm   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
-##  $ bill_depth_mm    : num  18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
-##  $ flipper_length_mm: int  181 186 195 NA 193 190 181 195 193 190 ...
-##  $ body_mass_g      : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+##  $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##  $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##  $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+##  $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
 ##  $ sex              : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 NA 1 2 1 2 NA NA ...
-##  $ year             : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
+##  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
 <pre class="r"><code># Pristupanje specifičnim stupcima i redovima
 vrsta &lt;- penguins$species # stupac
 prvi_redak &lt;- penguins[1, ] # redak</code></pre>
