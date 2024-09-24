@@ -220,8 +220,14 @@ library(palmerpenguins)
 data(&quot;penguins&quot;)
 
 # View(penguins)</code></pre>
-<pre class="r"><code># Pitanje: Koja je prosječna težina pingvina vrste Adelie na otoku Torgersen, a koja na otoku Dream?
-
+</div>
+<div id="naredba-select" class="section level3">
+<h3>Naredba select()</h3>
+<ul>
+<li>Kako bi odgovorili na to pitanje, najlaše je stvroriti novi tablicu u kojoj ćemo <strong>odabrati</strong> samo one varijable koje su nam potrebne za izračun: species, island i body_mass_g.</li>
+<li>Naredba <strong>select()</strong> je funkcija iz dplyr paketa koja služi za odabir (selektiranje) specifičnih stupaca iz data frame-a. Pomaže u fokusiranju samo na one varijable (stupce) koje su potrebne za analizu, a ignorira ostatak podataka.</li>
+</ul>
+<pre class="r"><code># Odabir (selektiranje) varijabli od interesa
 penguins %&gt;%
   select(species, island, body_mass_g)</code></pre>
 <pre><code>## # A tibble: 344 × 3
@@ -238,6 +244,17 @@ penguins %&gt;%
 ##  9 Adelie  Torgersen        3475
 ## 10 Adelie  Torgersen        4250
 ## # ℹ 334 more rows</code></pre>
+<p><strong>Pipe operator (%&gt;%) u R-u</strong></p>
+<ul>
+<li>Pipe operator (%&gt;%) dolazi iz magrittr paketa (dio Tidyverse-a) i koristi se za povezivanje više funkcija na čitljiviji način.</li>
+<li>Omogućuje prosljeđivanje rezultata iz jedne funkcije kao ulaz u sljedeću funkciju bez potrebe za ugnježđivanjem.</li>
+</ul>
+<p>Prednosti:</p>
+<ul>
+<li>Čitljivost – Kod je linearan i lakši za razumijevanje.</li>
+<li>Modularnost – Lako povezivanje različitih operacija bez pretrpavanja.</li>
+<li>Fleksibilnost – Može se koristiti s većinom funkcija.</li>
+</ul>
 <pre class="r"><code># Gdje je objekt? Zašto nije u environmentu?
 # Kreirajmo novi data frame s kojim možemo manipulirati
 

@@ -30,13 +30,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Paketi iz tidyverse-a se mogu učitati svi skupa pomoću naredbe __library(tidyverse)__.
 
-```{r}
+```{r tidyverse}
 library(tidyverse)
 ```
  
  Paket Tidyverse-a se mogu i zasebno učitavati.
  
-```{r}
+```{r zasebno}
 library(ggplot2)
 ```
  
@@ -47,7 +47,7 @@ library(ggplot2)
 
 #### __Koja je prosječna težina pingvina vrste Adelie u kilogramima na svakom od otoka?__
 
-```{r}
+```{r učitavanje}
 # Učitavanje paketa s podacima o Palmer pingvinima
 library(palmerpenguins)
 
@@ -57,14 +57,29 @@ data("penguins")
 # View(penguins)
 ```
 
+### Naredba select()
 
-```{r}
-
-
-# Pitanje: Koja je prosječna težina pingvina vrste Adelie na otoku Torgersen, a koja na otoku Dream?
-
+   - Kako bi odgovorili na to pitanje, najlaše je stvroriti novi tablicu u kojoj ćemo __odabrati__ samo one varijable koje su nam potrebne za izračun: species, island i body_mass_g.
+   - Naredba __select()__ je funkcija iz dplyr paketa koja služi za odabir (selektiranje) specifičnih stupaca iz data frame-a. Pomaže u fokusiranju samo na one varijable (stupce) koje su potrebne za analizu, a ignorira ostatak podataka.
+   
+```{r select}
+# Odabir (selektiranje) varijabli od interesa
 penguins %>%
   select(species, island, body_mass_g)
+```
+
+__Pipe operator (%>%) u R-u__ 
+
+   - Pipe operator (%>%) dolazi iz magrittr paketa (dio Tidyverse-a) i koristi se za povezivanje više funkcija na čitljiviji način.
+   - Omogućuje prosljeđivanje rezultata iz jedne funkcije kao ulaz u sljedeću funkciju bez potrebe za ugnježđivanjem.
+   
+Prednosti:
+   
+   - Čitljivost – Kod je linearan i lakši za razumijevanje.
+   - Modularnost – Lako povezivanje različitih operacija bez pretrpavanja.
+   - Fleksibilnost – Može se koristiti s većinom funkcija.
+
+```{r}
 
 # Gdje je objekt? Zašto nije u environmentu?
 # Kreirajmo novi data frame s kojim možemo manipulirati
