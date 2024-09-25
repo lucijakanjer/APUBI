@@ -2,7 +2,7 @@
 title: "Uvod u R i RStudio"
 author: "Lucija Kanjer"
 date: "16.09.2024."
-output: pdf_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
