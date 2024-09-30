@@ -1,0 +1,381 @@
+---
+title: "Uvod u R i RStudio"
+subtitle: "Analize podataka u biološkim istraživanjima"
+author: "Lucija Kanjer, e-mail: lucija.kanjer@biol.pmf.hr"
+date: "`r Sys.Date()`"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## "Koliko volim R i statistiku?"
+
+- Otvorite poveznicu: https://forms.office.com/e/FPkBKCs02J
+- ili __skenirajte QR kod__ i ispunite kratku anketu upoznavanja :)
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/anketa.png" width="700" />
+
+## Sadržaj praktikuma
+
+- __Uvod u rad u programskom okruženju R i osnovne funkcije, instaliranje programskih paketa__
+- Unos podataka u programsko okruženje R, struktura objekata
+- Rad s objektima i podacima te definiranje bioloških varijabli u R-u
+- Grafički prikaz bioloških podataka i testiranje razdiobe podataka u R-u
+- Primjeri osnovnih statističkih analiza kategoričkih i numeričkih varijabli u biološkim istraživanjima u R-u
+- Regresije i korelacije, linearni modeli bioloških podataka – primjeri u R-u
+- Primjena parametrijskih statističkih testova bioloških podataka u R-u 
+- Primjena neparametrijskih statističkih testova bioloških podataka u R-u
+- Primjeri multivarijatnih analize bioloških podataka u R-u - linearni modeli, klaster analize i ordinacijske analize 
+
+
+## Sadržaj današnje vježbe
+- Upoznavanje s RStudio sučeljem
+- Izvršavanje naredbi iz skripte
+- različiti načini ispisa
+- definiranje varijabli
+- pisanje komentara
+- osnovne matematičke operacije
+- postavljanje radnog direktorija
+- traženje pomoći
+- instalacija i učitavanje paketa
+- vizualizacija tablica
+- primjer izrade grafičkog prikaza
+
+
+## Ishodi učenja praktikuma
+
+   - Upoznati se s R okruženejm
+   - Premostiti strah od „programiranja”
+   - Proći „energiju aktivacije” koja je potrebna za korištenje R-a i rada na vlastitim podacima i projektima
+   - Moći izraditi vlastite analize uz pomoći svih danas dostupnih alata
+   
+### Što nije ishod ovog praktikuma?
+
+   - Sveobuhvatno znanje o R-u
+   - Sveobuhvatno znanje o svim statističkim metodama
+   - Tečaj programiranja
+   - Učenje napamet naredbi R-a
+
+
+## Prednosti R-a
+
+1. Besplatan softver otvorenog koda.
+   
+2. Velika zajednica korisnika i podrška.
+   
+3. Prilagođen akademskoj zajednici (i biolozima).
+   
+4. Fleksibilnost i prilagodljivost - veliki broj paketa za specijalizirane analize.
+   
+5. Napredne statističke i analitičke metode.
+   
+6. Vizualizacija podataka.
+
+7. Reproducibilnost.
+
+
+
+## Mane R-a u odnosu na *point and click* programe {.smaller}
+
+- Strma krivulja učenja.
+- Manje intuitivno sučelje.
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/mane.png" width="800" />
+
+## Instalacija R-a
+R se može preuzeti sa CRAN-a (Comprehensive R archive network) https://cran.r-project.org/ 
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/Installation1.png" width="900" />
+
+## Instalacija RStudio-a
+
+RStudio je dostupan za preuzimanje na Posit web stranici:
+
+   - https://posit.co/download/rstudio-desktop/ 
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/Installation2.png" width="900" />
+
+## RStudio - sučelje
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/Rstudio_panels.png" width="900" />
+
+## RStudio - sučelje
+
+   - Panel A: __Skripta__ - dio u koji pišemo naredbe i komentare koje možemo izvršavati i spremiti za ponovnu upotrebu.
+   - Panel B: __Konzola__ (engl. console) - dio u kojemo se naredbe izvršavaju (interaktivno okruženje), ali se ne može spremiti za ponovnu upotrebu; također i dio za terminal, render i pozadinske poslove.
+   - Panel C: Okoliš (engl. __environment__) - dio u kojem vidimo stvorene R objekte; također i dio za povijest, veze; git sinkronizaciju i tutoriale.
+   - Panel D: __plots__ - dio za vizualizaciju grafova; __packages__ - dio za vizualizaciju i učitavanje dostupnih paketa; __help__ - u kojem se prikažu tražene informacije o paketima i naredbama; __files__ - vizualizacija trenutnog radnog direktorija (nije za postavljanje novog radnog direktorije).
+
+
+## Rad u R-u i RStudio-u
+
+   - Otvorite RStudio i krenimo s prvim naredbama! 
+   - Izvršavanje naredbi: __Ctrl + Enter__ u skripti.
+   
+```{r hello world}
+# Prva naredba: ispis teksta iz skripte u konzolu
+print("Hello world!")
+```
+
+## Komentari
+
+   - Sve što se piše iza znaka "__#__" u skripti, predstavlja __komentar__ i neće biti izvršeno kao naredba. 
+   - Komentari se pišu u skripti kako bi naš kod bio pregledan i reproducibilan.
+
+```{r komentar}
+# Ovo je primjer komentara cijelog reda
+print("Dobar dan svijete!") # ovo je komentar nakon naredbe
+```
+
+
+## Definiranje varijabli
+   - Varijable su pojedinačne vrijednosti.
+   - U R-u, svaka varijabla može pohranjivati brojeve, tekstualne vrijednosti ili logičke vrijednosti.
+   - Definiraju se pomoći znakova "__<-__" ili  "="
+   
+```{r varijable}
+# Definiranje objekata (varijabli)
+a <- 5
+b = 3 
+```
+
+* prvi način je mnogo češće korišten u praksi jer se znak "=" koristi za i u druge svrhe 
+
+## Ispis
+
+Ispis tj. prikaz R objekata, može se izvršiti na više načina:
+   
+```{r ispis1}
+# Različiti načina ispisa u konzoli
+# Različiti načina ispisa
+print(a) # ispis u konzoli
+a # ispis u konzoli
+print(a + b) # ispis rezultata u konzoli
+```
+
+---
+
+Još načina ispisa:
+
+```{r cat}
+cat(a) # ispisu u konzoli, ali ima više mogućnosti u odnosu na print()
+```
+
+
+```{r}
+View(a) # ispis u novom tab-u RStudio-a
+```
+
+- Naredba <code>View()</code> se koristi uglanvom za tablice.
+- pazite na veliko slovo V!
+
+
+## Zadatak
+
+Napravite varijablu "visina" te u nju spremite vrijednost svoje visine, te varijablu "godina" te u nju spremite vrijednost svoje godine rođenja. Ispišite svaku varijablu na različiti način.
+
+```{r visina}
+# Primjer: Definirajmo varijablu svoje visine i godine rođenja
+visina  <- 170
+godina <- 1995
+# Ispišimo ove varijable!
+print(visina)
+cat (godina)
+```
+
+## Rad s osnovnim matematičkim operacijama
+
+```{r operacije1}
+# Zbroj
+zbroj <- 5 + 3
+print(zbroj)
+
+# Umnožak
+umnožak <- 4 * 7
+print(umnožak)
+```
+## Zadatak
+Na isti način kao za zbroj i umnožak izračunajmo i ispišimo rezultate oduzimanja(razliku) i dijeljenja brojeva (kvocijent).
+
+## Razlika i kvocijent
+```{r operacije2}
+# Razlika
+razlika <- 10 -4
+print(razlika)
+
+# Kvocijent
+kvocijent <- 38 / 7
+print(kvocijent)
+```
+
+## Rad s datotakama
+Radni direktorij, engl. __working directory__
+
+```{r wd}
+# Provjeravanje radnog direktorija (working directory)
+getwd()
+
+# Postavljanje radnog direktorija
+setwd("C:/Users/lucij/Documents/APUBI/01_Uvod/zivotinje") # moj laptop
+
+#setwd("C:/Users/Hrvoje/Documents/APUBI/01_Uvod/zivotinje") # poslovno računalo
+
+# Iznad je još jedan primjer korištenja komentara: 
+# za naredbe koje ne želimo da se trenutno izvršavaju.
+```
+
+## Traženje pomoći
+
+```{r help}
+help(setwd)
+?setwd
+??setwd
+```
+
+## Učitavanje datoteke s podacima
+
+```{r read.table}
+# Učitavanje datoteke s podacima u objekt "zivotinje"
+zivotinje <- read.table("C:/Users/lucij/Documents/APUBI/01_Uvod/zivotinje/zivotinje.txt", 
+                        header = TRUE)
+```
+
+## Kako pogledati svoje podatke?
+
+```{r print1}
+print(zivotinje) # ispis cijele tablice u konzoli
+```
+
+
+```{r vizualizacija}
+# Vizualizacija podataka - kratki oblik
+head(zivotinje) # prikaz "glave" tablice
+```
+
+---
+```{r view}
+View(zivotinje) # prikaz u novom tabu pored skripte
+```
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/zivotinje.png" width="800" />
+
+## Paketi
+   - Instalacijom dodatnih paketa moguće je prilagoditi svoje analize, a izbora je stvarno puno!
+   - Npr. Za vizualizaciju podataka najčešće se korsiti dodatni paket __ggplot2__ koji nije uključen u temeljni R (*base R*) te ga je potrebno instalirati. 
+    - Instalacija paketa izvršava se samo jednom, a učitavanje paketa (library() naredba) mora se izvršiti prilikom svakog otvaranja RStudio-a, tj. početkom svake nove sesije.
+
+## Paketi
+
+```{r packages}
+# Za dodatne analize moramo instalirati dodatne R pakete
+# Instalacija paketa - samo jednom
+```
+
+<code>install.packages(ggplot2)</code>
+```{r library}
+# Učitavanje paketa u radno okruženje - pri svakom pokretanju R-a
+library(ggplot2)
+```
+
+
+## Primjer izrade grafa
+
+```{r graf1}
+# izrada objekta "graf_visina"
+graf_visina <- ggplot(data = zivotinje, aes(x = vrsta, y = visina_cm)) +
+  geom_boxplot(aes(color = skupina)) + 
+  labs(title = "Visina životinja",
+       x = "vrsta",
+       y = "visina (cm)")
+```
+
+---
+
+```{r graf2}
+# ispis objekta "graf_visina"
+graf_visina
+```
+
+## Izmjenite gornji graf tako da se umjesto visine prikazuju podaci za masu!
+
+Pazite da izmjenitie naslov grafa i nazive osi da odgovaraju novom prikazu.
+
+---
+
+```{r}
+# izrada objekta "graf_masa"
+graf_masa <- ggplot(data = zivotinje, aes(x = vrsta, y = masa_g)) +
+  geom_boxplot(aes(color = skupina)) + 
+  labs(title = "Masa životinja",
+       x = "vrsta",
+       y = "masa (g)")
+```
+
+---
+
+```{r}
+# ispis objekta "graf_masa"
+graf_masa
+```
+
+
+## Samostalni zadaci
+
+ 1. Kreirajte 3 varijable za visine 3 različite životinje.
+ 2. Izračunajte i ispišite umnožak visine životinja koje ste upisali.
+ 3. Napravite novu mapu naziva "biljke" te ju postavite kao novi radni direktorij.
+ 4. Instalirajte paket "tidyverse" i učitajte ga u radno okruženje..
+
+   
+## Rješenje zadatka 1
+
+```{r zad1}
+# 1. Kreirajte 3 varijable za visine 3 različite životinje.
+miš <- 5
+sova <- 58
+ris <- 75
+```
+
+## Rješenje zadatka 2
+
+```{r zad2}
+# 2. Izračunajte i ispišite umnožak visine životinja koje ste upisali.
+zbroj_visina <- miš + sova + ris
+print(zbroj_visina)
+
+```
+
+## Rješenje zadatka 3
+
+- u Pregledniku datoketa napravite novu mapu (desni klik -> Novo -> Mapa -> nazovite ju "biljke")
+
+```{r}
+# 3. Napravite novu mapu naziva "biljke" te ju postavite kao novi radni direktorij.
+# Postavljanje radnog direktorija naredbomsetwd()
+setwd("C:/Users/lucij/Documents/APUBI/01_Uvod/biljke")
+```
+
+
+## Rješenje zadatka 4
+
+```{r zad4 }
+# 4. Instalirajte paket "RColorBrewer" i učitajte ga u radno okruženje.
+
+```
+
+<code>install.packages(RColorBrewer)</code>
+
+```{r}
+library(RColorBrewer)
+```
+
+## Kviz
+
+Otvorite poveznicu: https://forms.office.com/e/cG5bh8WvPk 
+
+ili __skenirajte QR kod__ i ispunite kratki kviz danas naučenoga! :)
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/kviz.png" width="700" />
+   

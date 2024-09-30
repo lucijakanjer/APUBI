@@ -1,0 +1,297 @@
+---
+title: "Unos podataka u programsko okruženje R i struktura objekata"
+author: "Lucija Kanjer, e-mail: lucija.kanjer@biol.pmf.hr"
+date: "`r Sys.Date()`"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Sadržaj praktikuma
+
+- Uvod u rad u programskom okruženju R i osnovne funkcije, instaliranje programskih paketa
+- *__Unos podataka u programsko okruženje R, struktura objekata__*
+- Rad s objektima i podacima te definiranje bioloških varijabli u R-u
+- Grafički prikaz bioloških podataka i testiranje razdiobe podataka u R-u
+- Primjeri osnovnih statističkih analiza kategoričkih i numeričkih varijabli u biološkim istraživanjima u R-u
+- Regresije i korelacije, linearni modeli bioloških podataka – primjeri u R-u
+- Primjena parametrijskih statističkih testova bioloških podataka u R-u 
+- Primjena neparametrijskih statističkih testova bioloških podataka u R-u
+- Primjeri multivarijatnih analize bioloških podataka u R-u - linearni modeli, klaster analize i ordinacijske analize 
+
+
+## Sadržaj današnje vježbe
+
+- Kreiranje objekata u R-u - ručni unos
+- Varijable, vektori, matrice i podatkovni okviri (*data frame*)
+- Provjera tipa podataka
+- Provjera strukture objekata
+- Učitavanje datoteka u R (tekstualne, CSV i Excel datoteke)
+- Pristupanje pojedinačnim stupcima i retcima iz tablica
+- Izvoz R objekata u datoteke
+
+## Ručni unos objekata u R-u
+
+### Varijable
+
+```{r varijable}
+### Kreiranje objekata u R-u - ručni unos
+# 1. Varijable
+x <- 3.14         # numeric - brojčana vrijednost
+y <- "DNA"        # character - tekst (mora ići u navodnike)
+z <- TRUE         # logical - logička vrijednost (TRUE/FALSE)
+```
+
+## Provjera tipa i struktire podataka
+
+```{r str1}
+# Provjera tipa podataka
+class(x) # prikazuje samo tip varijable
+str(x) # struktura: prikazuje tip varijable i što ona sadrži
+```
+
+## Provjerite tip podataka varijabli y i z!
+
+```{r}
+# Provjerite tip podataka varijabli y i z!
+class(y)
+class(z)
+```
+
+## Vektori
+
+Vektor je niz elemenata iste vrste (npr. svi brojevi ili svi tekstovi).
+
+```{r vektori }
+# 2. Vektori
+geni <- c("BRCA1", "TP53", "MYC")  # tekstualni vektor gena
+print(geni)
+duljine <- c(1863, 1179, 1584)     # numerički vektor duljina gena u parovima baza (bp)
+print(duljine)
+```
+
+## Matrice
+Matrica je 2D struktura podataka iste vrste (redovi x stupci). 
+
+```{r matrice1}
+# 3. Matrice - skup vektora istog tipa
+# Definiranje matrice
+matrix_mikrobi <- matrix(c(85, 47, 37, 10, 65, 50, 28, 8), 
+                         nrow = 4, # postavljanje broja redaka u matrici
+                         byrow = TRUE) # definiranje popunjavanja matrice po retcima
+
+# Dodavanje naziva redaka i stupaca
+rownames(matrix_mikrobi) <- c("Bakterija1", "Bakterija2", "Gljivica1", "Gljivica2")
+colnames(matrix_mikrobi) <- c("CFU_kuhinja", "CFU_kupaonica")
+```
+
+---
+
+```{r matrice2}
+print(matrix_mikrobi)
+```
+
+## Podatkovni okvir (*data frame*)
+
+Data frame je struktura podataka koja može sadržavati vektore varijabli raličitih vrsta (brojevi, tekst, logičke vrijednosti).
+
+```{r df1}
+# 4. Podatkovni okvir (data frame) - skup vektora različitih tipova
+df_mikrobi <- data.frame(
+  CFU = c(85, 47, 37, 10, 65, 50, 28, 8), # numeručki vektor
+  mikrorganizam = c("Bakterija", "Bakterija", "Gljivica", "Gljivica"),  # tekstualni vektor 
+  lokacija = c("kuhinja", "kupaonica", "kuhinja", "kupaonica") # tekstualni vektor
+  )
+```
+
+---
+
+```{r df2}
+# Uvid u data frame
+print(df_mikrobi) # ispis u konzoli
+```
+
+---
+```{rdf3}
+View(df_mikrobi) # vizualizacija tablice u novom listu
+```
+<img src="C:/Users/lucij/Documents/APUBI/slike/df_mikrobi.png" width="800" />
+
+## Učitavanje podataka iz datoteka
+```{r wd}
+### Učitavanje datoteka
+# Podsjetimo se naredbi za provjeru i postavljanje radnog direktorija!
+getwd()
+setwd("C:/Users/lucij/Documents/APUBI/02_Unos_podataka") #izmjeniti za vaše računalo!
+```
+
+
+## Učitavanje tekstualnih datoteka
+
+```{r txt1}
+# Učitavanje tekstualnih datoteka
+zivotinje <- read.table("zivotinje/zivotinje.txt",
+                        header = TRUE)
+```
+
+---
+```{rtxt2}
+View(zivotinje) # ili klik na objekt u environmentu
+```
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/zivotinje.png" width="800" />
+
+## Učitavanje CSV tablica
+
+```{r csv1}
+# Učitavanje CSV tablica
+biljke <- read.csv("biljke/biljke.csv", 
+                   header = TRUE)
+```
+
+---
+
+```{r csv2}
+View(biljke) # ili klik na objekt u environmentu
+```
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/biljke.png" width="800" />
+
+## Paket readxl
+
+- Za Excel prvo moramo ucitati paket readxl
+- <code>install.packages("readxl")</code>
+
+```{r excel}
+
+library(readxl) # učitavanje paketa
+```
+
+---
+
+```{r}
+# Učitavanje Excel tablice pingvini
+pingvini <- read_excel("pingvini/pingvini.xlsx")
+View(pingvini) # ili klik na objekt u environmentu
+```
+
+<img src="C:/Users/lucij/Documents/APUBI/slike/pingvini.png" width="800" />
+
+## Pregled i struktura data frame-ova
+
+```{r}
+# Pregled prvih redaka podataka
+head(zivotinje)
+
+```
+
+---
+
+```{r}
+# Pregled zadnjih redaka podataka
+tail(zivotinje)
+
+```
+
+---
+
+```{r}
+# Tipovi podataka - provjera strukture
+str(zivotinje)
+```
+
+## Izvlačenje pojedinačnih stupaca data frame-a
+
+```{r}
+# Stupac predstavlja varijable
+vrsta_zivotinja <- zivotinje$vrsta 
+print(vrsta_zivotinja)
+
+```
+
+## Izvlačenje pojedinačnih redaka data frame-a
+
+```{r}
+# Redak predstavlja uzorke
+zivotinja_1 <- zivotinje[1, ]
+print(zivotinja_1)
+```
+
+## Izvoz R objekata u datoteke
+
+- koristimo naredbu <code>write.table()</code>
+- nova datoteka će se stvoriti u radnom direktoriju u kojem se trenutno nalazimo
+
+```{r izvoz}
+# Izvoz R objekata u datoteke
+write.table(df_mikrobi, # definiramo koji objekt želimo eksportati
+            file = "mikrobi.csv", # definiramo naziv datoteke
+            sep = ",", # definiramo separatore stupaca
+            row.names = FALSE) # definiramo da R ne zapiše broj redaka u zasebni stupac
+```
+
+
+## Zadaci
+
+1. Kreirajte 2 varijable, u jednu spremite ime vrste po vašem izboru, a u drugu broj jedinki te vrste.
+2. Ispištie tip objekta za novokreirane varijable.
+3. Kreirajte 2 vektora, u jednom pohranite tekstove, a u drugom brojeve.
+4. Kreirajte data frame s biološkim podacima po vašem izboru, mora sadržavati 2 numeričke i 2 kategoričke varijable.
+5. Ispištie strukturu novokreiranog data frame-a.
+6. Iz vašeg kreiranog data frame-a izolirajte jedan stupac i spremite ga u novi vektor.
+
+## Rješenje zadatka 1
+
+```{r zad1}
+# 1. Kreirajte 2 varijable, u jednu spremite ime vrste po vašem izboru, a u drugu broj jedinki te vrste.
+vrsta <- "glavata zelva" 
+brojnost <- 26
+```
+
+## Rješenje zadatka 2
+
+```{r zad 2}
+# 2. Ispištie tip objekta za novokreirane varijable.
+class(vrsta)
+class(brojnost)
+```
+
+## Rješenje zadatka 3
+
+```{r zad3}
+#3. Kreirajte 2 vektora, u jednom pohranite tekstove, a u drugom brojeve.
+vektor_kornjača <- c("glavata želva", "zelena želva", "sedmopruga usminjača")
+vekror_jedinki <- c(27, 17, 7)
+```
+
+## Rješenje zadatka 4
+
+```{r zad4}
+# 4. Kreirajte data frame s biološkim podacima po vašem izboru, 
+# mora sadržavati 2 numeričke i 2 kategoričke varijable.
+df_kornjače <- data.frame(
+  vrsta = c("glavata želva", "zelena želva", "sedmopruga usminjača"),
+  brojnost = c(27, 17, 7),
+  duljina = c(58, 39, 96),
+  lokacija = c("Jadransko more", "Jadransko more", "Tirensko more")
+)
+```
+
+## Rješenje zadatka 5
+
+```{r zad5}
+# 5. Ispištie strukturu novokreiranog data frame-a.
+str(df_kornjače)
+```
+
+## Rješenje zadatka 6
+
+```{r zad6}
+# 6. Iz vašeg kreiranog data frame-a izolirajte jedan stupac i spremite ga u novi vektor.
+lokacija_kornjače <- df_kornjače$lokacija 
+print(lokacija_kornjače)
+
+```
+
