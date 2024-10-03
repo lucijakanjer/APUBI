@@ -1,0 +1,315 @@
+---
+title: "Rad s objektima i podacima, definiranje bioloških varijabli"
+author: "Lucija Kanjer"
+date: '`r Sys.Date()`'
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Uvod u Tidyverse {.smaller}
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/tidyverse.png" width="500" />
+
+- __Tidyverse__ je skup međusobno povezanih R paketa osmišljenih za olakšavanje __rada s podacima__.
+- Osnovna filozofija Tidyverse-a je __"tidy" (uredan) oblik podataka__, gdje su podaci organizirani u tabličnom formatu (__redovi predstavljaju opažanja__, a __stupci varijable__).
+- Omogućava intuitivno i efikasno manipuliranje, analiziranje i vizualiziranje podataka.
+- Istovjetne naredbe ponekad su dostupne i u base R-u, ali tidyverse je češće korišten u praksi i pruža puno više mogućnosti za rad s podacima.
+
+## Osnovni paketi u Tidyverse-u {.smaller}
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/tidyverse_packages.png" width="500" />
+
+   - __ggplot2__ – Napredna i fleksibilna vizualizacija podataka.
+   - __dplyr__ – Efikasna manipulacija podacima (filtriranje, sortiranje, agregacija).
+   - __tidyr__ – Transformacija podataka u "tidy" format.
+   - __readr__ – Učitavanje podataka iz tekstualnih datoteka (CSV, TSV).
+   - __tibble__ – Poboljšani rad s tablicama, alternativa data.frame-u.
+
+## Učitajmo tidyverse u R radno okruženje!
+
+```{r}
+# Paketi iz tidyverse-a se mogu učitati svi skupa
+library(tidyverse)
+# Paketi Tidyverse-a se mogu i zasebno učitavati, npr. ggplot2
+library(ggplot2)
+```
+
+ 
+## Set podataka o Palmer pingvinima {.smaller}
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/adelie_0.jpg" width="600" />
+
+- Za ovu vježbu koristit ćemo set proširenu verziju podataka __Palmer pengiuns__.
+- Podaci o pingvinima arhipelaga Palmer sadrže mjerenja veličine za __tri vrste pingvina__ (Adelie, Chinstrap i Gentoo) promatrane na __tri otoka__ (Torgersen, Dream, Biscoe) u arhipelagu Palmer na  Antarktici.
+- Ove je podatke prikupila dr. Kristen Gorman u sklopu dugoročnih američkih ekoloških istraživanja stanice Palmer. Podaci su uvezeni izravno s podatkovnog portala Inicijative za podatke o okolišu ( Environmental Data Initiative - EDI) i dostupni su za korištenje uz CC0 licencu ("Bez pridržanih prava") u skladu s Politikom podataka Palmer Station.
+- prošireni set podataka sadrži dodatne varijable i dostupan je na https://www.kaggle.com/datasets/samybaladram/palmers-penguin-dataset-extended/data
+
+## Tablica s podacima o pingvinima
+
+Otvorite tablicu __palmerpenguins_extended.xlsx__ u Excelu.
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/pingvini_excel.jpg" width="700" />
+
+## Rad s podacima u R-u
+
+__Podsjetimo se:__ pregled trenutnog i postavljanje novog radnog direktorija.
+
+```{r}
+# predled trenutnog radnog direktorija
+getwd()
+# postavljanje novog radnog direktorija
+setwd("C:/Users/Hrvoje/Documents/APUBI/03_Rad_s_podacima")
+```
+
+## Učitavanje podataka iz Excel tablice
+
+```{r učitavanje}
+# Učitavanje potrebnog paketa
+library(readxl)
+# Učitavanje podataka iz Excel tablice u objekt
+penguins <- read_excel("palmerpenguins_original.xlsx")
+
+```
+
+__<code>View(penguins)</code>__ # ili klik na objekt u environmentu
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/pingvini_view.jpg" width="700" />
+
+---
+
+Provjera strukture tablice i tipa podataka.
+
+```{r str}
+# Provjera tipa i strukture objekta
+str(penguins)
+```
+
+## Pitanje na koje želimo odgovor je: 
+
+### __"Koja je prosječna masa pingvina vrste Adelie u kilogramima na svakom od otoka?"__
+
+## Naredba __<code>select()</code>__
+
+   - Kako bi odgovorili na to pitanje, najlakše je stvroriti novi tablicu u kojoj ćemo __odabrati__ samo one varijable koje su nam potrebne za izračun: species, island i body_mass_g.
+   - Naredba __<code>select()</code>__ je funkcija iz dplyr paketa koja služi za odabir (selektiranje) specifičnih stupaca iz data frame-a. Pomaže u fokusiranju samo na one varijable (stupce) koje su potrebne za analizu, a ignorira ostatak podataka.
+   - Primjer: __<code>select(podaci, varijabla1, varijabla2, ...)</code>__
+
+## Naredba __<code>select()</code>__
+   
+```{r select}
+# Korak 1: Odabir relevantnih varijabli (stupaca)
+select(penguins, # podaci
+       species, # varijabla 1
+       island, # varijabla 2
+       body_mass_g)# varijabla 3
+```
+
+## Gdje je objekt? Zašto nije u environmentu?
+
+   - Jer ga nismo spremili kao novi objekt!
+   - Kreirajmo novi objekt naziva __"penguins_selected"__ u koji će se spremiti izabrane varijable.
+
+```{r tibble}
+# Ponovimo korak 1, ali kreirajmo novi objekt u koji će se spremiti
+penguins_selected <- select(penguins, species, island, body_mass_g)
+
+```
+
+---
+
+__<code>View(penguins_selected)</code>__ ili klik na objekt u environmentu za vizualizaciju nove tablice.
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/adelie_1.jpg" width="700" />
+
+
+## Funkcija __<code>filter()</code>__
+
+  - __<code>filter()</code>__ je funkcija iz dplyr paketa koja služi za filtriranje redova u *data frame*-u.
+  - Zadržava samo one redove koji zadovoljavaju specificirane uvjete.
+  - Čitljivost - Jasno izražava uvjete u kodu.
+  - Fleksibilnost - Moguće kombinirati više uvjeta korištenjem logičkih operatora (&, |).
+Primjer: 
+
+Naredbom __<code>filter()</code>__ želimo od svih redova s vrstama pingvina zadržati samo pripadnike vrste Adelie.
+
+```{r filter}
+# Korak 2: Filtriranje uzoraka (redaka) vrste "Adelie"
+penguins_adelie <- filter(penguins_selected, # podaci
+                          species == "Adelie") # uvjet filtriranja
+
+```
+
+---
+
+__<code>View(penguins_adelie)</code>__ ili klik na objekt u environmentu za vizualizaciju nove tablice.
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/adelie_2.jpg" width="700" />
+
+## Funkcija __<code>mutate()</code>__
+
+  - __<code>mutate()</code>__ je funkcija iz dplyr paketa koja služi za kreiranje novih stupaca (varijabli) ili modifikaciju postojećih unutar data frame-a. 
+  - Pomaže u dodavanju izmjenjenih varijabli bez potrebe za kreiranjem novog data frame-a.
+  - koristit ćemo funkciju __<code>mutate()</code>__ kako bi kreirali novu varijablu koja prikazuje masu pingvina u kilogramima umjesto u gramima.
+
+```{r mutate}
+# Korak 3: Kreiranje nove varijable koja sadrži masu izraženu u kilogramima
+penguins_mass_kg <- mutate(penguins_adelie, # podaci
+                           body_mass_kg = body_mass_g / 1000) # kreiranje nove varijable
+
+```
+
+---
+
+__<code>View(penguins_mass_kg)</code>__ ili klik na objekt u environmentu za vizualizaciju nove tablice.
+
+<img src="C:/Users/Hrvoje/Documents/APUBI/slike/adelie_3.jpg" width="700" />
+
+## Funkcija __<code>group_by()</code>__ u R-u (dplyr)
+
+ - __<code>group_by()</code>__ je funkcija iz dplyr paketa koja omogućava grupiranje podataka prema jednoj ili više varijabli. 
+ - Koristi se često u kombinaciji s funkcijama poput __<code>summarise()</code>__ za izvođenje agregatnih operacija unutar svake grupe.
+ 
+```{r group_by}
+# Korak 4: Zadavanje grupiranja i prikaza rezultata po otocima
+penguins_grouped <- group_by(penguins_mass_kg, # podaci
+                             island) # varijabla po pokoj želimo grupirati
+
+```
+ 
+ 
+## Funkcija __<code>summarise()</code>__ 
+
+ - __<code>summarise()</code>__ ili __<code>summarize()</code>__ je funkcija iz dplyr paketa koja se koristi za sažimanje podataka na temelju agregatnih operacija. 
+- Najčešće se koristi u kombinaciji s __<code>group_by()</code>__ kako bi se izračunale sumarizirane statistike unutar grupa.
+ 
+```{r  group_by summarise}
+# Korak 5: Kreiranje finalne sumariziranje tablice rezultata
+penguins_result <- summarise(penguins_grouped, # podaci
+                             average_mass = mean(body_mass_kg)) # nova varijabla za prosjek
+
+# Ispis konačnog rezultata
+print(penguins_result)
+```
+
+## __Zašto nam se ne prikazuju podaci za Torgersen otok?__
+
+ - Jer nismo uklonili nedostajuće vrijednosti!
+ - Koristiti funkciju na.omit().
+ 
+### Funkcija __<code>na.omit()</code>__ 
+
+ - __<code>na.omit()</code>__ funkcija iz *base* R-a koja se koristi za __uklanjanje redaka s nedostajućim vrijednostima (NA)__ iz data frame-a ili vektora.
+ - Vraća filtrirani data frame bez redaka s NA vrijednostima.
+
+---
+
+```{r na.omit}
+# Kako bi mogli izračunati rezultat za otok Torgersen moramo ukloniti nedostajuće podatke
+# Uklanjanje uzoraka s nedostajućim podacima
+penguins_cleaned <- na.omit(penguins_mass_kg)
+
+# Ponovimo korake 4 i 5 s novom tablicom
+# Korak 4: Zadavanje grupiranja i prikaza rezultata po otocima
+penguins_grouped <- group_by(penguins_cleaned, island)
+```
+
+---
+
+```{r result}
+# Korak 5: Kreiranje finalne sumariziranje tablice rezultata
+penguins_result <- summarise(penguins_grouped, average_mass = mean(body_mass_kg))
+
+# Ispis konačnog rezultata
+print(penguins_result)
+```
+
+## __Odgovor na postavljeno pitanje pitanje s početka:__
+
+ __"Prosječna masa pingvina vrste Adelie na otoku Biscoe i Torgersen iznosila je 3.71 kg, a na otoku Dream 3.69 kg."__
+ 
+ <img src="C:/Users/Hrvoje/Documents/APUBI/slike/adelie_5.jpg" width="700" />
+
+## Zadatak
+
+ - Koristeći gore naučene funkcije za manipulaciju podacima, kreirajte data frame koji će dati odgovor na pitanje: 
+ 
+__"Koja je posječna masa u kilogramima pingvina vrste Gentoo mužjaka, a koja ženki?__
+
+
+## Rješenje
+
+```{r rjesenje1}
+# Korak 1: Selektiranje relevantnih varijabli
+penguins_selected_2 <- select(penguins, species, sex, body_mass_g)
+
+# # Korak 2: Filtriranje uzoraka (redaka) vrste "Gentoo"
+penguins_gentoo <- filter(penguins_selected_2, species == "Gentoo")
+
+# Korak 3: Kreiranje nove varijable koja sadrži masu izraženu u kilogramima
+gentoo_mass_kg <- mutate(penguins_gentoo, body_mass_kg = body_mass_g / 1000)
+
+# Korak 4: Uklananje nedostajućih vrijednosti
+gentoo_cleaned <- na.omit(gentoo_mass_kg)
+
+# Korak 4: Zadavanje grupiranja i prikaza rezultata po spolu
+gentoo_grouped <- group_by(gentoo_cleaned, sex)
+
+# Korak 5: Kreiranje finalne sumariziranje tablice rezultata
+gentoo_result <- summarise(gentoo_grouped, average_mass = mean(body_mass_kg))
+
+```
+
+---
+
+```{r rjesenje2}
+# Ispis konačnog rezultata
+print(gentoo_result)
+
+```
+
+Odgovor: "Prosječna masa pingvina vrste Gentoo ženki iznosila je 4.68 kg, a mužjaka 5.48 kg."
+
+## Kako smanjiti količinu napisanog koda?
+
+__Pipe operator (%>%)__ 
+
+   - Pipe operator (%>%) dolazi iz magrittr paketa (dio Tidyverse-a) i koristi se za povezivanje više funkcija na čitljiviji način.
+   - Omogućuje prosljeđivanje rezultata iz jedne funkcije kao ulaz u sljedeću funkciju bez potrebe za ugnježđivanjem.
+   
+Prednosti:
+   
+   - Čitljivost – Kod je linearan i lakši za razumijevanje.
+   - Modularnost – Lako povezivanje različitih operacija bez pretrpavanja.
+   - Fleksibilnost – Može se koristiti s većinom funkcija.
+
+## Primjer pisanja koda pomoći pipe operatora
+
+```{r pipe1}
+# Korištenje pipe operatora za smanenje količine koda
+adelie_result <- penguins %>% #podaci
+  select(species, island, body_mass_g) %>% #odabir relevantnih varijabli
+  filter(species == "Adelie") %>% #filtriranje samo pingvina vrste Adelie
+  mutate(body_mass_kg = body_mass_g/1000) %>% #kreiranje nove varijable
+  na.omit() %>% #uklanjanje nedostajućih vrijednosti
+  group_by(island) %>% #grupiranje po otocima
+  summarise(average_mass = mean(body_mass_kg)) #sumariziraj kao prosjek
+print(adelie_result)
+```
+
+## Rješenje zadatka pomoći pipe opetatora
+
+```{r pipe2}
+gentoo_result <- penguins %>%
+  select(species, sex, body_mass_g) %>%
+  filter(species == "Gentoo") %>%
+  mutate(body_mass_kg = body_mass_g/1000) %>%
+  na.omit() %>%
+  group_by(sex) %>%
+  summarise(average_mass = mean(body_mass_kg))
+
+print(gentoo_result)
+```
+
