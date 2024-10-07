@@ -1,0 +1,40 @@
+---
+title: "Grafički prikaz bioloških podataka i testiranje razdiobe podataka u R-u"
+author: "Lucija Kanjer"
+date: '07 10 2024 '
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Sadržaj praktikuma
+
+- Uvod u rad u programskom okruženju R i osnovne funkcije, instaliranje programskih paketa
+- Unos podataka u programsko okruženje R, struktura objekata
+- Rad s objektima i podacima te definiranje bioloških varijabli u R-u
+- *__Grafički prikaz bioloških podataka i testiranje razdiobe podataka u R-u__*
+- Primjeri osnovnih statističkih analiza kategoričkih i numeričkih varijabli u biološkim istraživanjima u R-u
+- Regresije i korelacije, linearni modeli bioloških podataka – primjeri u R-u
+- Primjena parametrijskih statističkih testova bioloških podataka u R-u 
+- Primjena neparametrijskih statističkih testova bioloških podataka u R-u
+- Primjeri multivarijatnih analize bioloških podataka u R-u - linearni modeli, klaster analize i ordinacijske analize 
+
+## Sadržaj današnje vježbe
+
+## R Paket: ggplot2
+
+### Opis
+
+- ggplot2 je jedan od najpopularnijih paketa za vizualizaciju podataka u R-u.
+- Zasnovan je na *Grammar of Graphics*, što omogućava korisnicima da sloje grafičke elemente i prilagođavaju ih na različite načine.
+- Fleksibilan je za stvaranje složenih grafika uz relativno jednostavan i intuitivan kod.
+
+## Ključne karakteristike ggplot2 paketa
+
+- Jednostavnost u izradi prilagođenih vizualizacija.
+- Podržava različite tipove grafikona: histogrami, scatterplot-ovi, boxplot-ovi, line grafikoni i mnogi drugi.
+- Omogućava kombiniranje više plotova u jedan prikaz.
+- Visok stupanj prilagodbe: boje, naslovi, osi, oznake, veličina i drugi estetski elementi.
+

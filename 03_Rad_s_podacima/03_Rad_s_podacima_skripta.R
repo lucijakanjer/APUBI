@@ -3,7 +3,7 @@
 
 ##############################################################
 
-# 2. Unos podataka u programsko okruženje R i struktura objekata
+# 3. Rad s podacima i objektima
 
 # Uključene su sve korištenje naredbe, ALI NEKE SU NEPOTPUNE ILI SADRŽE NAMJERNE POGREŠKE:
 # Dovršite naredbe i također dodajte komentare za sebe (koristite # za komentiranje)

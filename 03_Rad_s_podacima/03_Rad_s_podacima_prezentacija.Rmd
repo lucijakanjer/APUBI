@@ -1,6 +1,6 @@
 ---
-title: "Rad s objektima i podacima, definiranje bioloških varijabli"
-author: "Lucija Kanjer"
+title: "Rad s objektima i podacima u R-u"
+author: "Lucija Kanjer, e-mail: lucija.kanjer@biol.pmf.hr"
 date: '`r Sys.Date()`'
 output: ioslides_presentation
 ---
@@ -8,6 +8,28 @@ output: ioslides_presentation
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+## Sadržaj praktikuma
+
+- Uvod u rad u programskom okruženju R i osnovne funkcije, instaliranje programskih paketa
+- Unos podataka u programsko okruženje R, struktura objekata
+- *__Rad s objektima i podacima te definiranje bioloških varijabli u R-u__*
+- Grafički prikaz bioloških podataka i testiranje razdiobe podataka u R-u
+- Primjeri osnovnih statističkih analiza kategoričkih i numeričkih varijabli u biološkim istraživanjima u R-u
+- Regresije i korelacije, linearni modeli bioloških podataka – primjeri u R-u
+- Primjena parametrijskih statističkih testova bioloških podataka u R-u 
+- Primjena neparametrijskih statističkih testova bioloških podataka u R-u
+- Primjeri multivarijatnih analize bioloških podataka u R-u - linearni modeli, klaster analize i ordinacijske analize 
+
+
+## Sadržaj današnje vježbe
+
+- odabir samo određenih varijabli iz seta podataka - naredba <code>select()</code>
+- filtriranje uzoraka oadranih karakteristika - naredba <code>filter()</code>
+- kreiranje nove varijable - naredba <code>mutate()</code>
+- grupiranje rezultata po varijablama - naredba <code>group_by()</code>
+- prikaz rezultata prosjeka varijabli po grupama - <code>naredba summarize()</code>
+- uklanjanje nedostajućih vrijednosti - naredba <code>na.omit()</code>
+- pisanje koda s pipe opetatorom (<code>%>%</code>)
 
 ## Uvod u Tidyverse {.smaller}
 
